@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/10/29 17:46:06 by ainthana         ###   ########.fr       */
+/*   Created: 2025/10/29 17:33:27 by ainthana          #+#    #+#             */
+/*   Updated: 2025/10/29 17:37:11 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(int ac, char **av)
+int	ft_strlen(char *str)
 {
-	if (ac != 2)
-		return (printf(RED"Error\nUsage : ./cub3d <maps.cub>\n"RESET), 1);
-	if (!check_file(av[1]))
-		return (1);
-	printf(GREEN"Loading map %s\n"RESET, av[1]);
-	return (0);
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int ft_strcmp(const char *s1, const char *s2)
+{
+    size_t  i;
+
+    i = 0;
+    while (s1[i] && s2[i] && s1[i] == s2[i])
+        i++;
+    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

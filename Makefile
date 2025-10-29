@@ -6,7 +6,7 @@
 #    By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 12:00:59 by ainthana          #+#    #+#              #
-#    Updated: 2025/10/29 13:03:24 by ainthana         ###   ########.fr        #
+#    Updated: 2025/10/29 17:41:31 by ainthana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ MLX_LIB     = $(MLX_DIR)/libmlx.a
 MLX_LINUX   = $(MLX_DIR)/libmlx_Linux.a
 LFLAGS      = $(MLX_LIB) $(MLX_LINUX) -lX11 -lXext
 
-SRC         = srcs/main.c
+SRC         = srcs/main.c \
+				srcs/parsing/parsing.c \
+				srcs/utils/utils.c \
+
 OBJ_DIR     = obj
 OBJ         = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -36,8 +39,19 @@ all: $(NAME)
 $(NAME): $(OBJ) $(MLX_LIB) $(MLX_LINUX)
 	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
 
+
 # ==========================================================
-# Object files
+#                       	COLORS
+# ==========================================================
+RESET = \033[0m
+BOLD = \033[1m
+GREEN = \033[32m
+RED = \033[31m
+CYAN = \033[36m
+BLUE = \033[34m
+
+# ==========================================================
+# 						Object files
 # ==========================================================
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
@@ -47,13 +61,13 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 # ==========================================================
-# MiniLibX
+# 						MiniLibX
 # ==========================================================
 $(MLX_LIB) $(MLX_LINUX):
 	$(MAKE) -C $(MLX_DIR)
 
 # ==========================================================
-# Cleaning
+# 						Cleaning
 # ==========================================================
 clean:
 	rm -rf $(OBJ_DIR)
@@ -65,7 +79,7 @@ fclean: clean
 re: fclean all
 
 # ==========================================================
-# Bonus
+# 						Bonus
 # ==========================================================
 bonus: $(BONUS_OBJ)
 	$(CC) $(OBJ) $(BONUS_OBJ) $(LFLAGS) -o $(NAME)

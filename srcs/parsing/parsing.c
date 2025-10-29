@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/10/29 17:46:06 by ainthana         ###   ########.fr       */
+/*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
+/*   Updated: 2025/10/29 17:37:40 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(int ac, char **av)
+int	check_file(char *filename)
 {
-	if (ac != 2)
-		return (printf(RED"Error\nUsage : ./cub3d <maps.cub>\n"RESET), 1);
-	if (!check_file(av[1]))
-		return (1);
-	printf(GREEN"Loading map %s\n"RESET, av[1]);
-	return (0);
+	int len = ft_strlen(filename);
+
+	if (len < 4  || ft_strcmp(filename + len - 4, ".cub") != 0)
+	{
+		printf(RED"Error\nFichier invalide: extension .cub requise\n"RESET);
+		return (0);
+	}
+	return (1);
 }
