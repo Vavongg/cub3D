@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/10/29 17:40:08 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:09:56 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "../get_next_line/get_next_line.h"
 
 
 // Couleurs ANSI pour printf
@@ -81,7 +82,8 @@ typedef struct s_config {
 // functions
 
 int	check_file(char *filename);
-int	ft_strlen(char *str);
 int ft_strcmp(const char *s1, const char *s2);
+int	open_cub_file(char *file);
+char **read_cub_file(int fd);
 
 #endif

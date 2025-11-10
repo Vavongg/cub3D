@@ -6,7 +6,7 @@
 #    By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 12:00:59 by ainthana          #+#    #+#              #
-#    Updated: 2025/10/29 17:41:31 by ainthana         ###   ########.fr        #
+#    Updated: 2025/11/10 16:36:51 by ainthana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,15 @@ MLX_LINUX   = $(MLX_DIR)/libmlx_Linux.a
 LFLAGS      = $(MLX_LIB) $(MLX_LINUX) -lX11 -lXext
 
 SRC         = srcs/main.c \
-				srcs/parsing/parsing.c \
-				srcs/utils/utils.c \
+              srcs/parsing/parsing.c \
+              srcs/utils/utils.c \
+              get_next_line/get_next_line.c \
+              get_next_line/get_next_line_utils.c
 
 OBJ_DIR     = obj
 OBJ         = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-BONUS_SRC   = 
+BONUS_SRC   =
 BONUS_OBJ   = $(BONUS_SRC:%.c=$(OBJ_DIR)/%.o)
 
 # ==========================================================
@@ -38,7 +40,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(MLX_LIB) $(MLX_LINUX)
 	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
-
 
 # ==========================================================
 #                       	COLORS
