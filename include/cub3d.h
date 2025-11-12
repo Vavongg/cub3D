@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/10 14:09:56 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:40:17 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,22 @@ typedef struct s_config {
 
 // functions
 
-int	check_file(char *filename);
-int ft_strcmp(const char *s1, const char *s2);
-int	open_cub_file(char *file);
-char **read_cub_file(int fd);
+int		check_file(char *filename);
+int 	ft_strcmp(const char *s1, const char *s2);
+char	*ft_strdup(const char *s);
+int		is_empty_line(char *line);
+int		open_cub_file(char *file);
+char 	**read_cub_file(int fd);
+void	parse_cub(char **tab, t_config *config);
+void	parse_config_line(char *line, t_config *config);
+int		is_texture(char *str);
+int		is_color(char *str);
+void	print_error(const char *msg);
+int		is_texture(char *str);
+int		is_color(char *str);
+void	parse_texture(char **tokens, t_config *config);
+void	parse_color(char **tokens, t_config *config);
+char	**ft_split(char const *s, char c);
+void	free_split(char **split);
 
 #endif

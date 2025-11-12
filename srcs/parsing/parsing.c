@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/10 14:06:10 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:26:32 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,86 @@ char **read_cub_file(int fd)
 		count++;
 	}
 	return (tab);
+}
+
+int is_map_start(char *line)
+{
+    int i;
+
+	i = 0;
+    if (!line)
+        return (0);
+    while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
+    	i++;
+    if (line[i] == '0' || line[i] == '1' || line[i] == 'N' ||
+        line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+        return (1);
+    return (0);
+}
+int	is_texture(char *str)
+{
+	return (!ft_strcmp(str, "NO") || !ft_strcmp(str, "SO")
+				|| !ft_strcmp(str, "WE") || !ft_strcmp(str, "EA"));
+}
+
+int	is_color(char *str)
+{
+	return (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"));
+}
+
+void	parse_texture(char **tokens, t_config *config)
+{
+	if (!ft_strcmp(tokens[0], "NO"))
+		config->textures.north = ft_strdup(tokens[1]);
+	if (!ft_strcmp(tokens[0], "SO"))
+		config->textures.south = ft_strdup(tokens[1]);
+	if (!ft_strcmp(tokens[0], "WE"))
+		config->textures.west = ft_strdup(tokens[1]);
+	if (!ft_strcmp(tokens[0], "EA"))
+		config->textures.east = ft_strdup(tokens[1]);
+}
+
+void	parse_color(char **tokens, t_config *config)
+{
+	if (!ft_strcmp(tokens[0], "F"))
+		assign_color(tokens[1], &config->floor); //faire assign_color qui decoupera le rgb;
+	else if (!ft_strcmp(tokens[0], "C"))
+		assign_color(tokens[1], &config->ceiling);
+	else
+		print_error("Invalid color identifier");
+}
+
+void	parse_config_line(char *line, t_config *config)
+{
+	char	**tokens;
+
+	tokens = ft_split(line, ' ');
+	if (!tokens || !tokens[0])
+		return ;
+	if (is_texture(tokens[0]))
+		parse_texture(tokens, config);
+	else if (is_color(tokens[0]))
+		parse_color(tokens, config);
+	else
+		print_error("Unknown configuration line");
+	free_split(tokens);
+}
+
+void	parse_cub(char **tab, t_config *config)
+{
+	int	i;
+
+	i = 0;
+	if (!tab[i])
+		print_error("No map found in .cub file");
+	while (tab[i] && is_empty_line(tab[i]))
+		i++;
+	while (tab[i] && !is_map_start(tab[i]))
+	{
+		if (!is_empty_line(tab[i]))
+			parse_config_line(tab[i], config);
+		i++;
+	}
+	parse_map(&tab[i], config);
+	is_valid_map(config);
 }
