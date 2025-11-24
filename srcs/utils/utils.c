@@ -6,20 +6,28 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:33:27 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/12 15:40:08 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:46:20 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    size_t  i;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-    i = 0;
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-        i++;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (str1[i] && str1[i] == str2[i] && i < n)
+		i++;
+	if (i < n)
+		return (str1[i] - str2[i]);
+	return (0);
 }
 
 char	*ft_strdup(const char *s)
@@ -60,5 +68,49 @@ void	print_error(const char *msg)
 {
 	printf(RED"%s\n"RESET, msg);
 	return ;
+}
+
+int	ft_isnumber(char *str)
+{
+	int	i;
+
+	if (!str || !*str)
+		return (0);
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+
+int	ft_atoi(const char *nptr)
+{
+	int				i;
+	int				sign;
+	unsigned int	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (ft_isdigit(nptr[i]))
+	{
+		result *= 10;
+		result += nptr[i] - '0';
+		i++;
+	}
+	return (result * sign);
 }
 

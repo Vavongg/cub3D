@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/12 15:26:32 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:34:32 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_file(char *filename)
 	int	len;
 
 	len = ft_strlen(filename);
-	if (len < 4 || ft_strcmp(filename + len - 4, ".cub") != 0)
+	if (len < 4 || ft_strncmp(filename + len - 4, ".cub", 4) != 0)
 	{
 		printf(RED"Error\nFichier invalide: extension .cub requise\n"RESET);
 		return (0);
@@ -81,32 +81,65 @@ int is_map_start(char *line)
 }
 int	is_texture(char *str)
 {
-	return (!ft_strcmp(str, "NO") || !ft_strcmp(str, "SO")
-				|| !ft_strcmp(str, "WE") || !ft_strcmp(str, "EA"));
+	return (
+		(ft_strncmp(str, "NO", 2) == 0 && str[2] == '\0')
+		|| (ft_strncmp(str, "SO", 2) == 0 && str[2] == '\0')
+		|| (ft_strncmp(str, "WE", 2) == 0 && str[2] == '\0')
+		|| (ft_strncmp(str, "EA", 2) == 0 && str[2] == '\0')
+	);
 }
 
 int	is_color(char *str)
 {
-	return (!ft_strcmp(str, "F") || !ft_strcmp(str, "C"));
+	return (
+		(ft_strncmp(str, "F", 1) == 0 && str[1] == '\0')
+		|| (ft_strncmp(str, "C", 1) == 0 && str[1] == '\0')
+	);
 }
+
 
 void	parse_texture(char **tokens, t_config *config)
 {
-	if (!ft_strcmp(tokens[0], "NO"))
+	if (!ft_strncmp(tokens[0], "NO ", 3))
 		config->textures.north = ft_strdup(tokens[1]);
-	if (!ft_strcmp(tokens[0], "SO"))
+	if (!ft_strncmp(tokens[0], "SO ", 3))
 		config->textures.south = ft_strdup(tokens[1]);
-	if (!ft_strcmp(tokens[0], "WE"))
+	if (!ft_strncmp(tokens[0], "WE ", 3))
 		config->textures.west = ft_strdup(tokens[1]);
-	if (!ft_strcmp(tokens[0], "EA"))
+	if (!ft_strncmp(tokens[0], "EA ", 3))
 		config->textures.east = ft_strdup(tokens[1]);
+}
+
+void	assign_color(char *str, t_color *color)
+{
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+
+	rgb = ft_split(str, ',');
+	if (!str)
+		print_error("error : allocation failed in assign_color");
+	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		print_error("error : invalid RGB format");
+	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
+		print_error("error : invalid RGB values");
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		print_error("error : RGB out of range (must be between 0 and 255)");
+	color->r = r;
+	color->g = g;
+	color->b = b;
+	free_split(rgb);
 }
 
 void	parse_color(char **tokens, t_config *config)
 {
-	if (!ft_strcmp(tokens[0], "F"))
+	if (!ft_strncmp(tokens[0], "F", 1))
 		assign_color(tokens[1], &config->floor); //faire assign_color qui decoupera le rgb;
-	else if (!ft_strcmp(tokens[0], "C"))
+	else if (!ft_strncmp(tokens[0], "C", 1))
 		assign_color(tokens[1], &config->ceiling);
 	else
 		print_error("Invalid color identifier");
