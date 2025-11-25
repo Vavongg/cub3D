@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:07:37 by ainthana          #+#    #+#             */
-/*   Updated: 2025/01/20 14:49:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/11/25 15:29:06 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-size_t	ft_strlen(char *str);
+size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2, int len_bytes);
 int		ft_new_line(char *str);
 

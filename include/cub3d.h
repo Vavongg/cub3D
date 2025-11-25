@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/24 15:28:35 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:07:01 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,38 @@ typedef struct s_config {
 
 // functions
 
-int		check_file(char *filename);
+void	print_error(const char *msg);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s);
-int		is_empty_line(char *line);
-int		open_cub_file(char *file);
-char 	**read_cub_file(int fd);
-void	parse_cub(char **tab, t_config *config);
-void	parse_config_line(char *line, t_config *config);
-int		is_texture(char *str);
-int		is_color(char *str);
-void	print_error(const char *msg);
-int		is_texture(char *str);
-int		is_color(char *str);
-void	parse_texture(char **tokens, t_config *config);
-void	parse_color(char **tokens, t_config *config);
 char	**ft_split(char const *s, char c);
 void	free_split(char **split);
 int		ft_isnumber(char *str);
+int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
+char 	*trim_newline(char *line);
+
+int		is_empty_line(char *line);
+int		is_texture(char *str);
+int		is_color(char *str);
+int		is_map_start(char *line);
+
+int		check_file(char *filename);
+int		open_cub_file(char *file);
+char 	**read_cub_file(int fd);
+
+void	parse_cub(char **tab, t_config *config);
+void	parse_config_line(char *line, t_config *config);
+void	parse_texture(char **tokens, t_config *config);
+void	parse_texture2(char **tokens, t_config *config);
+void	parse_color(char **tokens, t_config *config);
 void	assign_color(char *str, t_color *color);
+void    check_all_elements_present(t_config *config);
+
+void	check_floodfill(t_config *config);
+
+void	is_valid_map(t_config *config);
+int		is_map_start(char *line);
+
+void	parse_map(char **lines, t_config *config);
 
 #endif
