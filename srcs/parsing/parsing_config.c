@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:40:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 16:44:59 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:57 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void    parse_texture(char **tokens, t_config *config)
     if (!tokens[1] || tokens[2])
     {
         free_split(tokens);
-        print_error("error : texture configuration requires exactly one path");
+        print_error("Error : texture configuration requires exactly one path");
     }
     if (!ft_strncmp(tokens[0], "NO", 2))
     {
         if (config->textures.north)
         {
             free_split(tokens);
-            print_error("error : north texture defined multiple times");
+            print_error("Error : north texture defined multiple times");
         }
         config->textures.north = ft_strdup(tokens[1]);
     }
@@ -33,7 +33,7 @@ void    parse_texture(char **tokens, t_config *config)
         if (config->textures.south)
         {
             free_split(tokens);
-            print_error("error : south texture defined multiple times");
+            print_error("Error : south texture defined multiple times");
         }
         config->textures.south = ft_strdup(tokens[1]);
     }
@@ -44,14 +44,14 @@ void	parse_texture2(char **tokens, t_config *config)
 	if (!tokens[1] || tokens[2])
     {
         free_split(tokens);
-        print_error("error : texture configuration requires exactly one path");
+        print_error("Error : texture configuration requires exactly one path");
     }
 	if (!ft_strncmp(tokens[0], "WE", 2))
     {
         if (config->textures.west)
         {
             free_split(tokens);
-            print_error("error : west texture defined multiple times");
+            print_error("Error : west texture defined multiple times");
         }
         config->textures.west = ft_strdup(tokens[1]);
     }
@@ -60,7 +60,7 @@ void	parse_texture2(char **tokens, t_config *config)
         if (config->textures.east)
         {
             free_split(tokens);
-            print_error("error : east texture defined multiple times");
+            print_error("Error : east texture defined multiple times");
         }
         config->textures.east = ft_strdup(tokens[1]);
     }
@@ -73,12 +73,12 @@ void assign_color(char *str, t_color *color)
 
     rgb = ft_split(str, ',');
     if (!rgb)
-        print_error("error: ft_split allocation failed");
+        print_error("Error: ft_split allocation failed");
     if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] ||
         !ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
     {
         free_split(rgb);
-        print_error("error : invalid RGB format or non-numeric values");
+        print_error("Error : invalid RGB format or non-numeric values");
     }
     r = ft_atoi(rgb[0]);
     g = ft_atoi(rgb[1]);
@@ -86,7 +86,7 @@ void assign_color(char *str, t_color *color)
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
     {
         free_split(rgb);
-        print_error("error : RGB out of range (must be 0-255)");
+        print_error("Error : RGB out of range (must be 0-255)");
     }
     color->r = r;
     color->g = g;
@@ -100,14 +100,14 @@ void    parse_color(char **tokens, t_config *config)
     if (!tokens[1] || tokens[2])
     {
         free_split(tokens);
-        print_error("error : color configuration requires exactly one RGB value");
+        print_error("Error : color configuration requires exactly one RGB value");
     }
     if (!ft_strncmp(tokens[0], "F", 1))
     {
         if (config->floor.r != -1)
         {
             free_split(tokens);
-            print_error("error : floor color defined multiple times");
+            print_error("Error : floor color defined multiple times");
         }
         assign_color(tokens[1], &config->floor);
     }
@@ -116,7 +116,7 @@ void    parse_color(char **tokens, t_config *config)
         if (config->ceiling.r != -1)
         {
             free_split(tokens);
-            print_error("error : celing color defined multiple times");
+            print_error("Error : celing color defined multiple times");
         }
         assign_color(tokens[1], &config->ceiling);
     }
@@ -139,6 +139,6 @@ void    parse_config_line(char *line, t_config *config)
     else if (is_color(tokens[0]))
         parse_color(tokens, config);
     else
-        print_error("error : unknown configuration line");
+        print_error("Error : unknown configuration line");
     free_split(tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 15:43:59 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void init_map(t_config *config, char **lines, int *height, int *width)
 	*width = max;
 	config->map.grid = malloc(sizeof(char *) * (*height + 1));
 	if (!config->map.grid)
-		print_error("error : allocation failed for map");
+		print_error("Error : allocation failed for map");
 	config->map.height = *height;
 	config->map.width = *width;
 }
@@ -89,7 +89,7 @@ void	parse_map(char **lines, t_config *config)
 	{
 		config->map.grid[y] = malloc(sizeof(char) * (width + 1));
 		if (!config->map.grid[y])
-			print_error("error : allocation failed for map row");
+			print_error("Error : allocation failed for map row");
 		fill_line(config->map.grid[y], lines[y], width, config, y);
 		y++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:49:40 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 15:20:30 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    parse_cub(char **tab, t_config *config)
 
     i = 0;
     if (!tab[i])
-        print_error("error : no map found in .cub file");
+        print_error("Error : no map found in .cub file");
     while (tab[i] && !is_map_start(tab[i]))
     {
         if (!is_empty_line(tab[i]))
@@ -27,7 +27,7 @@ void    parse_cub(char **tab, t_config *config)
     }
     check_all_elements_present(config); 
     if (!tab[i])
-        print_error("error : map not found after configuration");
+        print_error("Error : map not found after configuration");
     parse_map(&tab[i], config);
     is_valid_map(config);
 }

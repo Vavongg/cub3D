@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:09:51 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 15:42:17 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void check_chars(t_config *config)
             c = config->map.grid[y][x];
             if (c != '0' && c != '1' && c != ' '
                  && c != 'N' && c != 'S' && c != 'E' && c != 'W')
-                print_error("error : invalid character in map or forbidden space (' ')");
+                print_error("Error : invalid character in map or forbidden space (' ')");
             x++;
         }
         y++;
@@ -60,16 +60,16 @@ void check_player(t_config *config)
         y++;
     }
     if (count != 1)
-        print_error("error : bro, u can't play with ur mate sry");
+        print_error("Error : bro, u can't play with ur mate sry");
 }
 
 void    check_all_elements_present(t_config *config)
 {
     if (!config->textures.north || !config->textures.south ||
         !config->textures.west || !config->textures.east)
-        print_error("error : one or more textures are missing");
+        print_error("Error : one or more textures are missing");
     if (config->floor.r == -1 || config->ceiling.r == -1)
-        print_error("error : floor or ceiling color is missing");
+        print_error("Error : floor or ceiling color is missing");
 }
 
 void is_valid_map(t_config *config)

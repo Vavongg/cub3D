@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:11:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 15:17:12 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ void	check_floodfill(t_config *config)
 
 	copy = malloc(sizeof(char *) * (config->map.height + 1));
 	if (!copy)
-		print_error("error : allocation failed for map validation");
+		print_error("Error : allocation failed for map validation");
 	y = 0;
 	while (y < config->map.height)
 	{
 		copy[y] = ft_strdup(config->map.grid[y]);
 		if (!copy[y])
-			print_error("error : allocation failed for map validation row");
+			print_error("Error : allocation failed for map validation row");
 		y++;
 	}
 	x = (int)config->player.x;
 	y = (int)config->player.y;
 	if (!flood_fill(copy, x, y, config->map.width, config->map.height))
-		print_error("error: map is not closed");
+		print_error("Error: map is not closed");
 	i = 0;
 	while (i < config->map.height)
 		free(copy[i++]);
