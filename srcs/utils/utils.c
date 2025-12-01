@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:33:27 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 15:30:57 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:39:53 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	is_empty_line(char *line)
 void	print_error(const char *msg)
 {
 	printf(RED"%s\n"RESET, msg);
-	return ;
+	exit(EXIT_FAILURE);
 }
 
 int	ft_isnumber(char *str)

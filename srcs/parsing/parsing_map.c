@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 17:44:24 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:43:59 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,15 @@
 static void fill_map_row(char *row, char *line, int width)
 {
     int x;
-    int len;
-    char c;
+    int len = ft_strlen(line);
 
-	x = 0;
-	len = ft_strlen(line);
+    x = 0;
     while (x < width)
     {
-        if (x < len)
-            c = line[x];
+        if (x < len && line[x] != '\n' && line[x] != '\r')
+            row[x] = line[x];
         else
-            c = '\0';
-        if (c == ' ' || c == '\0') 
-            row[x] = '1';
-        else
-            row[x] = c;
+            row[x] = ' ';
         x++;
     }
     row[width] = '\0';

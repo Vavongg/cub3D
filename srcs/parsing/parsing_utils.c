@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:39:44 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 19:01:43 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:19:28 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int is_map_start(char *line)
         return (1);
     return (0);
 }
+
 int is_texture(char *str)
 {
-    return ((ft_strncmp(str, "NO", 2) == 0 && str[2] == '\0')
-         || (ft_strncmp(str, "SO", 2) == 0 && str[2] == '\0')
-         || (ft_strncmp(str, "WE", 2) == 0 && str[2] == '\0')
-         || (ft_strncmp(str, "EA", 2) == 0 && str[2] == '\0'));
+    return ((ft_strncmp(str, "NO", 3) == 0 && str[2] == '\0')
+         || (ft_strncmp(str, "SO", 3) == 0 && str[2] == '\0')
+         || (ft_strncmp(str, "WE", 3) == 0 && str[2] == '\0')
+         || (ft_strncmp(str, "EA", 3) == 0 && str[2] == '\0'));
 }
 
 int is_color(char *str)

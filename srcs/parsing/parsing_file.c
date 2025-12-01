@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:39:05 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 16:42:59 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 14:26:26 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,102 +38,51 @@ int	open_cub_file(char *file)
 	return (fd);
 }
 
-char *trim_newline(char *line)
+int count_lines(char *filename)
 {
-    int len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n')
-        line[len - 1] = '\0';
-    return line;
-}
+    int fd;
+    char *line;
+    int count = 0;
 
-// char **read_cub_file(int fd)
-// {
-//     char    **tab = NULL;
-//     char    *line;
-//     char    **new_tab;
-//     int     count = 0;
-//     int     i;
-
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         new_tab = malloc(sizeof(char *) * (count + 2));
-//         if (!new_tab)
-//             print_error("error: allocation failed while reading .cub file");
-//         i = 0;
-//         while (i < count)
-//         {
-//             new_tab[i] = tab[i];
-//             i++;
-//         }
-//         new_tab[count] = line;
-//         new_tab[count + 1] = NULL;
-//         free(tab);
-//         tab = new_tab;
-//         count++;
-//     }
-//     return (tab);
-// }
-
-// char **read_cub_file(int fd)
-// {
-//     char    **tab = NULL;
-//     char    *line;
-//     char    **new_tab;
-//     int     count = 0;
-//     int     i;
-
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         line = trim_newline(line);
-//         new_tab = malloc(sizeof(char *) * (count + 2));
-//         if (!new_tab)
-//             print_error("error: allocation failed while reading .cub file");
-//         i = 0;
-//         while (i < count)
-//         {
-//             new_tab[i] = tab[i];
-//             i++;
-//         }
-//         new_tab[count] = line;
-//         new_tab[count + 1] = NULL;
-//         free(tab);
-//         tab = new_tab;
-//         count++;
-//     }
-//     return tab;
-// }
-
-char **read_cub_file(int fd)
-{
-    char    **tab = NULL;
-    char    *line;
-    char    **new_tab;
-    int     count = 0;
-
-    while ((line = get_next_line(fd)) != NULL)
+    fd = open(filename, O_RDONLY);
+    if (fd == -1)
     {
-        // retirer le \n
-        int len = ft_strlen(line);
-        if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
-
-        // allouer un nouveau tableau de pointeurs
-        new_tab = malloc(sizeof(char *) * (count + 2));
-        if (!new_tab)
-            print_error("error: allocation failed while reading .cub file");
-
-        // copier les anciens pointeurs
-        for (int i = 0; i < count; i++)
-            new_tab[i] = tab[i];
-
-        new_tab[count] = line;      // ajouter la nouvelle ligne
-        new_tab[count + 1] = NULL;
-
-        free(tab);                  // libérer seulement le tableau de pointeurs
-        tab = new_tab;
-        count++;
+        perror("Error: Cannot open .cub file for counting");
+        exit(1);
     }
-    return tab;
+    line = get_next_line(fd);
+    while (line != NULL)
+    {
+        count++;
+        free(line);
+        line = get_next_line(fd);
+    }
+    close(fd);
+    return (count);
 }
 
+char **read_cub_file(char *filename)
+{
+    int     total_lines;
+    char    **tab;
+    int     fd;
+    char    *line;
+    int     i;
 
+    total_lines = count_lines(filename);
+    tab = malloc(sizeof(char *) * (total_lines + 1));
+    if (!tab)
+        print_error("Error: Allocation failed for main tab.");
+    fd = open_cub_file(filename);
+    i = 0;
+    line = get_next_line(fd);
+    while (line != NULL)
+    {
+        tab[i] = line;
+        i++;
+        line = get_next_line(fd);
+    }
+    tab[i] = NULL;
+    close(fd);
+    return (tab);
+}

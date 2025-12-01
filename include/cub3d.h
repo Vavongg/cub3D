@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 18:07:01 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 12:26:23 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	free_split(char **split);
 int		ft_isnumber(char *str);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
-char 	*trim_newline(char *line);
 
 int		is_empty_line(char *line);
 int		is_texture(char *str);
@@ -98,7 +97,7 @@ int		is_map_start(char *line);
 
 int		check_file(char *filename);
 int		open_cub_file(char *file);
-char 	**read_cub_file(int fd);
+char 	**read_cub_file(char *filename);
 
 void	parse_cub(char **tab, t_config *config);
 void	parse_config_line(char *line, t_config *config);

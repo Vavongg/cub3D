@@ -6,15 +6,20 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:40:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 18:01:44 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:44:59 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	parse_texture(char **tokens, t_config *config)
+void    parse_texture(char **tokens, t_config *config)
 {
-	if (!ft_strncmp(tokens[0], "NO", 3))
+    if (!tokens[1] || tokens[2])
+    {
+        free_split(tokens);
+        print_error("error : texture configuration requires exactly one path");
+    }
+    if (!ft_strncmp(tokens[0], "NO", 2))
     {
         if (config->textures.north)
         {
@@ -23,7 +28,7 @@ void	parse_texture(char **tokens, t_config *config)
         }
         config->textures.north = ft_strdup(tokens[1]);
     }
-	if (!ft_strncmp(tokens[0], "SO", 3))
+    else if (!ft_strncmp(tokens[0], "SO", 2))
     {
         if (config->textures.south)
         {
@@ -32,12 +37,16 @@ void	parse_texture(char **tokens, t_config *config)
         }
         config->textures.south = ft_strdup(tokens[1]);
     }
-
 }
 
 void	parse_texture2(char **tokens, t_config *config)
 {
-	if (!ft_strncmp(tokens[0], "WE", 3))
+	if (!tokens[1] || tokens[2])
+    {
+        free_split(tokens);
+        print_error("error : texture configuration requires exactly one path");
+    }
+	if (!ft_strncmp(tokens[0], "WE", 2))
     {
         if (config->textures.west)
         {
@@ -46,7 +55,7 @@ void	parse_texture2(char **tokens, t_config *config)
         }
         config->textures.west = ft_strdup(tokens[1]);
     }
-	if (!ft_strncmp(tokens[0], "EA", 3))
+	else if (!ft_strncmp(tokens[0], "EA", 2))
     {
         if (config->textures.east)
         {
@@ -87,6 +96,12 @@ void assign_color(char *str, t_color *color)
 
 void    parse_color(char **tokens, t_config *config)
 {
+
+    if (!tokens[1] || tokens[2])
+    {
+        free_split(tokens);
+        print_error("error : color configuration requires exactly one RGB value");
+    }
     if (!ft_strncmp(tokens[0], "F", 1))
     {
         if (config->floor.r != -1)
@@ -96,29 +111,34 @@ void    parse_color(char **tokens, t_config *config)
         }
         assign_color(tokens[1], &config->floor);
     }
-	else if (!ft_strncmp(tokens[0], "C", 1))
+    else if (!ft_strncmp(tokens[0], "C", 1))
     {
         if (config->ceiling.r != -1)
         {
             free_split(tokens);
-            print_error("error : celling color defined multiple times");
+            print_error("error : celing color defined multiple times");
         }
         assign_color(tokens[1], &config->ceiling);
     }
 }
 
-void	parse_config_line(char *line, t_config *config)
+void    parse_config_line(char *line, t_config *config)
 {
-	char	**tokens;
+    char    **tokens;
 
-	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[0])
-		return ;
-	if (is_texture(tokens[0]))
-		parse_texture(tokens, config);
-	else if (is_color(tokens[0]))
-		parse_color(tokens, config);
-	else
-		print_error("error : unknown configuration line");
-	free_split(tokens);
+    tokens = ft_split(line, ' ');
+    if (!tokens || !tokens[0])
+        return ;
+    if (is_texture(tokens[0]))
+    {
+        if (!ft_strncmp(tokens[0], "NO", 2) || !ft_strncmp(tokens[0], "SO", 2))
+            parse_texture(tokens, config);
+        else
+            parse_texture2(tokens, config);
+    }
+    else if (is_color(tokens[0]))
+        parse_color(tokens, config);
+    else
+        print_error("error : unknown configuration line");
+    free_split(tokens);
 }

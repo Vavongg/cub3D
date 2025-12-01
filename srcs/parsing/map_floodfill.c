@@ -6,18 +6,18 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:11:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/25 17:43:32 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:17:12 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	flood_fill(char **map, int x, int y, int width, int height)
+static int  flood_fill(char **map, int x, int y, int width, int height)
 {
     if (x < 0 || x >= width || y < 0 || y >= height)
-        return (0);
+        return (0); 
     if (map[y][x] == '1' || map[y][x] == 'v')
-        return (1);
+        return (1); 
     map[y][x] = 'v';
     if (!flood_fill(map, x + 1, y, width, height))
         return (0);
