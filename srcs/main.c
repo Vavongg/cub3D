@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 17:02:21 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/05 12:15:57 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ static void	init_config(t_config *cfg)
     cfg->textures.west = NULL;
     cfg->textures.east = NULL;
     cfg->floor.r = -1;
+	cfg->floor.g = -1;
+	cfg->floor.b = -1;
     cfg->ceiling.r = -1;
+	cfg->ceiling.g = -1;
+	cfg->ceiling.b = -1;
     cfg->map.grid = NULL;
     cfg->map.width = 0;
     cfg->map.height = 0;
@@ -60,6 +64,8 @@ int main(int argc, char **argv)
 	if (argc != 2)
         print_error("Usage: ./cub3d <map.cub>");
 	init_config(&config);
+	if (!check_file(argv[1]))
+    	exit(1);
     tab = read_cub_file(argv[1]);
     parse_cub(tab, &config);
     free_split(tab);

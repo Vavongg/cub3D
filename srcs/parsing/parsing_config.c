@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:40:34 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 17:20:57 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/05 13:14:31 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void    parse_texture(char **tokens, t_config *config)
             free_split(tokens);
             print_error("Error : north texture defined multiple times");
         }
+		remove_newline(tokens[1]);
         config->textures.north = ft_strdup(tokens[1]);
     }
     else if (!ft_strncmp(tokens[0], "SO", 2))
@@ -35,6 +36,7 @@ void    parse_texture(char **tokens, t_config *config)
             free_split(tokens);
             print_error("Error : south texture defined multiple times");
         }
+		remove_newline(tokens[1]);
         config->textures.south = ft_strdup(tokens[1]);
     }
 }
@@ -53,6 +55,7 @@ void	parse_texture2(char **tokens, t_config *config)
             free_split(tokens);
             print_error("Error : west texture defined multiple times");
         }
+		remove_newline(tokens[1]);
         config->textures.west = ft_strdup(tokens[1]);
     }
 	else if (!ft_strncmp(tokens[0], "EA", 2))
@@ -62,36 +65,36 @@ void	parse_texture2(char **tokens, t_config *config)
             free_split(tokens);
             print_error("Error : east texture defined multiple times");
         }
+		remove_newline(tokens[1]);
         config->textures.east = ft_strdup(tokens[1]);
     }
 }
 
-void assign_color(char *str, t_color *color)
+void    assign_color(char *str, t_color *color)
 {
     char    **rgb;
-    int     r, g, b;
 
     rgb = ft_split(str, ',');
     if (!rgb)
         print_error("Error: ft_split allocation failed");
-    if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] ||
-        !ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
+    if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
     {
         free_split(rgb);
-        print_error("Error : invalid RGB format or non-numeric values");
+        print_error("Error : invalid RGB format");
     }
-    r = ft_atoi(rgb[0]);
-    g = ft_atoi(rgb[1]);
-    b = ft_atoi(rgb[2]);
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+    remove_newline(rgb[2]);
+    if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
     {
         free_split(rgb);
-        print_error("Error : RGB out of range (must be 0-255)");
+        print_error("Error : non-numeric values");
     }
-    color->r = r;
-    color->g = g;
-    color->b = b;
+    color->r = ft_atoi(rgb[0]);
+    color->g = ft_atoi(rgb[1]);
+    color->b = ft_atoi(rgb[2]);
     free_split(rgb);
+    if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
+        || color->b < 0 || color->b > 255)
+        print_error("Error : RGB out of range (must be 0-255)");
 }
 
 void    parse_color(char **tokens, t_config *config)

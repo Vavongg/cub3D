@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:11:13 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/05 13:16:48 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static int  flood_fill(char **map, int x, int y, int width, int height)
 {
     if (x < 0 || x >= width || y < 0 || y >= height)
-        return (0); 
+        return (0);
+    if (map[y][x] == ' ')
+        return (0);
     if (map[y][x] == '1' || map[y][x] == 'v')
-        return (1); 
+        return (1);
     map[y][x] = 'v';
     if (!flood_fill(map, x + 1, y, width, height))
         return (0);
@@ -26,7 +28,7 @@ static int  flood_fill(char **map, int x, int y, int width, int height)
     if (!flood_fill(map, x, y + 1, width, height))
         return (0);
     if (!flood_fill(map, x, y - 1, width, height))
-        return (0); 
+        return (0);
     return (1);
 }
 

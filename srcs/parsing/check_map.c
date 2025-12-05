@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:09:51 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/01 17:20:54 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:57:30 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,7 @@ void check_player(t_config *config)
         {
             char c = config->map.grid[y][x];
             if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-            {
                 count++;
-                config->player.x = x; 
-                config->player.y = y;
-                config->player.dir = c;
-            }
             x++;
         }
         y++;
