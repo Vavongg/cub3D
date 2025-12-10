@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 11:07:28 by ainthana          #+#    #+#             */
-/*   Updated: 2025/02/17 16:38:08 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:57:25 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,3 @@ char	*get_next_line(int fd)
 	stash = read_static(line);
 	return (line);
 }
-
-// int	main()
-// {
-// 	char	*str = NULL;
-// 	int			fd;
-// 	size_t		i;
-
-// 	i = 0;
-// 	fd = open("bible.txt", O_RDONLY);
-// 	while ((str = get_next_line(fd)))
-// 	{
-// 		printf("%s", str);
-// 		free(str);
-// 		i++;
-// 	}
-// 	close(fd);
-// }

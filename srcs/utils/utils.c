@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:33:27 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/05 13:26:03 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:41:08 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,12 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
-void	print_error(const char *msg)
-{
-	printf(RED"%s\n"RESET, msg);
-	exit(1);
-}
-
 int	ft_isnumber(char *str)
 {
 	int	i;
 
 	if (!str || !*str)
 		return (0);
-
 	i = 0;
 	while (str[i])
 	{
@@ -86,5 +79,3 @@ int	ft_isnumber(char *str)
 	}
 	return (1);
 }
-
-

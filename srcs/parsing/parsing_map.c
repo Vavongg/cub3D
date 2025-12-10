@@ -6,32 +6,33 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/05 13:27:15 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:52:21 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void fill_map_row(char *row, char *line, int width)
+static void	fill_map_row(char *row, char *line, int width)
 {
-    int x;
-    int len = ft_strlen(line);
+	int	x;
+	int	len;
 
-    x = 0;
-    while (x < width)
-    {
-        if (x < len && line[x] != '\n' && line[x] != '\r')
-        {
-            if (line[x] == '\t')
-                row[x] = ' ';
-            else
-                row[x] = line[x];
-        }
-        else
-            row[x] = ' ';
-        x++;
-    }
-    row[width] = '\0';
+	x = 0;
+	len = ft_strlen(line);
+	while (x < width)
+	{
+		if (x < len && line[x] != '\n' && line[x] != '\r')
+		{
+			if (line[x] == '\t')
+				row[x] = ' ';
+			else
+				row[x] = line[x];
+		}
+		else
+			row[x] = ' ';
+		x++;
+	}
+	row[width] = '\0';
 }
 
 static void	find_player(char c, int x, int y, t_config *config)
@@ -44,9 +45,9 @@ static void	find_player(char c, int x, int y, t_config *config)
 	}
 }
 
-static void init_map(t_config *config, char **lines, int *height, int *width)
+static void	init_map(t_config *config, char **lines, int *height, int *width)
 {
-	int i;
+	int	i;
 	int	len;
 	int	max;
 
@@ -69,17 +70,17 @@ static void init_map(t_config *config, char **lines, int *height, int *width)
 	config->map.width = *width;
 }
 
-static void	fill_line(char *dest, char *src, int width, t_config *config, int y)
+static void fill_line(char *dest, char *src, t_config *config, int y)
 {
-	int	x;
-	
-	x = 0;
-	while (x < (int)ft_strlen(src))
-	{
-		find_player(src[x], x, y, config);
-		x++;
-	}
-	fill_map_row(dest, src, width);
+    int x;
+
+    x = 0;
+    while (x < (int)ft_strlen(src))
+    {
+        find_player(src[x], x, y, config);
+        x++;
+    }
+    fill_map_row(dest, src, config->map.width);
 }
 
 void	parse_map(char **lines, t_config *config)
@@ -95,7 +96,7 @@ void	parse_map(char **lines, t_config *config)
 		config->map.grid[y] = malloc(sizeof(char) * (width + 1));
 		if (!config->map.grid[y])
 			print_error("Error : allocation failed for map row");
-		fill_line(config->map.grid[y], lines[y], width, config, y);
+		fill_line(config->map.grid[y], lines[y], config, y);
 		y++;
 	}
 	config->map.grid[height] = NULL;

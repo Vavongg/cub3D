@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/05 12:23:27 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/10 13:16:27 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		ft_isnumber(char *str);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 void	remove_newline(char *str);
+void	free_config(t_config *cfg);
+int		error_msg(char *msg);
 
 int		is_empty_line(char *line);
 int		is_texture(char *str);
@@ -97,20 +99,21 @@ int		is_color(char *str);
 int		is_map_start(char *line);
 
 int		check_file(char *filename);
+int		check_player(t_config *config);
+int		check_chars(t_config *config);
 int		open_cub_file(char *file);
 char 	**read_cub_file(char *filename);
 
 void	parse_cub(char **tab, t_config *config);
-void	parse_config_line(char *line, t_config *config);
-void	parse_texture(char **tokens, t_config *config);
-void	parse_texture2(char **tokens, t_config *config);
-void	parse_color(char **tokens, t_config *config);
-void	assign_color(char *str, t_color *color);
-void    check_all_elements_present(t_config *config);
+int		parse_config_line(char *line, t_config *config);
+int		parse_texture(char **tokens, t_config *config);
+int		parse_texture2(char **tokens, t_config *config);
+int		parse_color(char **tokens, t_config *config);
+int		assign_color(char *str, t_color *color);
+int		check_all_elements_present(t_config *config);
+int		check_floodfill(t_config *config);
 
-void	check_floodfill(t_config *config);
-
-void	is_valid_map(t_config *config);
+int		is_valid_map(t_config *config);
 int		is_map_start(char *line);
 
 void	parse_map(char **lines, t_config *config);

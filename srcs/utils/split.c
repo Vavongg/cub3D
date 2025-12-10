@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:30:18 by ainthana          #+#    #+#             */
-/*   Updated: 2025/11/12 15:35:10 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:41:17 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	free_split(char **split)
 	int	i;
 
 	if (!split)
-		return;
+		return ;
 	i = 0;
 	while (split[i])
 	{
