@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:48 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/10 13:16:27 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:18:20 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ int		ft_atoi(const char *nptr);
 void	remove_newline(char *str);
 void	free_config(t_config *cfg);
 int		error_msg(char *msg);
+int		check_virg(char *str);
+int		is_valid_rgb(char **rgb);
+char	*get_join_color(char **tokens);
+void	replace_tabs_with_spaces(char *line);
 
 int		is_empty_line(char *line);
 int		is_texture(char *str);
@@ -116,6 +120,6 @@ int		check_floodfill(t_config *config);
 int		is_valid_map(t_config *config);
 int		is_map_start(char *line);
 
-void	parse_map(char **lines, t_config *config);
+int		parse_map(char **lines, t_config *config);
 
 #endif

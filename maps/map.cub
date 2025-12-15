@@ -1,11 +1,12 @@
-NO ./path_no
-SO ./path_so
-WE ./path_we
-WE ./path_we
-EA ./path_ea
+NO ./path
+SO ./path
+WE ./path
+EA ./path
 F 220,100,0
-C 220,200,0
+C 225,30,0
 
+11111
+11111
 11111
 1N001
 11111

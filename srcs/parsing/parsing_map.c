@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:54:53 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/10 16:52:21 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:59:23 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,59 +45,66 @@ static void	find_player(char c, int x, int y, t_config *config)
 	}
 }
 
-static void	init_map(t_config *config, char **lines, int *height, int *width)
+// Modifié : Retourne int et s'arrête à la première ligne vide
+static int	init_map(t_config *config, char **lines, int *height, int *width)
 {
-	int	i;
 	int	len;
-	int	max;
 
 	*height = 0;
-	i = 0;
-	len = 0;
-	max = 0;
-	while (lines[*height])
+	*width = 0;
+	while (lines[*height] && !is_empty_line(lines[*height]))
 	{
 		len = ft_strlen(lines[*height]);
-		if (len > max)
-			max = len;
+		if (len > *width)
+			*width = len;
 		(*height)++;
 	}
-	*width = max;
 	config->map.grid = malloc(sizeof(char *) * (*height + 1));
 	if (!config->map.grid)
-		print_error("Error : allocation failed for map");
+		return (error_msg("Error : allocation failed for map"));
 	config->map.height = *height;
 	config->map.width = *width;
+	return (1);
 }
 
-static void fill_line(char *dest, char *src, t_config *config, int y)
+static void	fill_line(char *dest, char *src, t_config *config, int y)
 {
-    int x;
+	int	x;
 
-    x = 0;
-    while (x < (int)ft_strlen(src))
-    {
-        find_player(src[x], x, y, config);
-        x++;
-    }
-    fill_map_row(dest, src, config->map.width);
+	x = 0;
+	while (x < (int)ft_strlen(src))
+	{
+		find_player(src[x], x, y, config);
+		x++;
+	}
+	fill_map_row(dest, src, config->map.width);
 }
 
-void	parse_map(char **lines, t_config *config)
+int	parse_map(char **lines, t_config *config)
 {
 	int	y;
-	int	height;
-	int	width;
+	int	h;
+	int	w;
 
-	init_map(config, lines, &height, &width);
 	y = 0;
-	while (y < height)
+	while (lines[y] && !is_empty_line(lines[y]))
+		y++;
+	while (lines[y])
 	{
-		config->map.grid[y] = malloc(sizeof(char) * (width + 1));
+		if (!is_empty_line(lines[y++]))
+			return (error_msg("Error : Empty line inside or after map"));
+	}
+	if (!init_map(config, lines, &h, &w))
+		return (0);
+	y = 0;
+	while (y < h)
+	{
+		config->map.grid[y] = malloc(sizeof(char) * (w + 1));
 		if (!config->map.grid[y])
-			print_error("Error : allocation failed for map row");
+			return (error_msg("Error : allocation failed for map row"));
 		fill_line(config->map.grid[y], lines[y], config, y);
 		y++;
 	}
-	config->map.grid[height] = NULL;
+	config->map.grid[h] = NULL;
+	return (1);
 }

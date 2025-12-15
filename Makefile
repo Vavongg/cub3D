@@ -6,7 +6,7 @@
 #    By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 12:00:59 by ainthana          #+#    #+#              #
-#    Updated: 2025/12/10 12:27:57 by ainthana         ###   ########.fr        #
+#    Updated: 2025/12/15 13:10:47 by ainthana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LFLAGS      = $(MLX_LIB) $(MLX_LINUX) -lX11 -lXext
 SRC         = srcs/main.c \
               srcs/parsing/parse_cub.c srcs/parsing/parsing_map.c srcs/parsing/parsing_config.c \
 			  srcs/parsing/parsing_file.c srcs/parsing/parsing_utils.c srcs/parsing/check_map.c srcs/parsing/map_floodfill.c \
-              srcs/utils/utils.c srcs/utils/split.c srcs/utils/atoi.c srcs/utils/error_utils.c \
+              srcs/utils/utils.c srcs/utils/utils2.c srcs/utils/split.c srcs/utils/atoi.c srcs/utils/error_utils.c \
               get_next_line/get_next_line.c \
               get_next_line/get_next_line_utils.c
 

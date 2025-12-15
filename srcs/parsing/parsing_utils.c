@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:39:44 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/10 15:39:25 by ainthana         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:13:44 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,40 @@ int	is_map_start(char *line)
 	return (0);
 }
 
-void	remove_newline(char *str)
+int	is_valid_rgb(char **rgb)
 {
-	int	i;
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		return (0);
+	remove_newline(rgb[2]);
+	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
+		return (0);
+	return (1);
+}
 
-	i = 0;
-	while (str[i])
+char	*get_join_color(char **tokens)
+{
+	char	*res;
+	int		len;
+	int		i;
+	int		j;
+	int		k;
+
+	len = 0;
+	i = 1;
+	while (tokens[i])
+		len += ft_strlen(tokens[i++]);
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	i = 1;
+	k = 0;
+	while (tokens[i])
 	{
-		if (str[i] == '\n' || str[i] == '\r')
-		{
-			str[i] = '\0';
-			return ;
-		}
+		j = 0;
+		while (tokens[i][j])
+			res[k++] = tokens[i][j++];
 		i++;
 	}
+	res[k] = '\0';
+	return (res);
 }
