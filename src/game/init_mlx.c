@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:03:01 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/16 18:53:59 by wbaali           ###   ########.fr       */
+/*   Updated: 2026/01/18 20:53:48 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@ static int	ft_init_mlx_connection(t_config *config)
 	if (!config->mlx)
 	{
 		printf("Error\nFailed to initialize MLX\n");
-		return (0);
-	}
-	return (1);
-}
-
-static int	ft_create_window(t_config *config)
-{
-	config->win = mlx_new_window(config->mlx, WIDTH, HEIGHT, "cub3D");
-	if (!config->win)
-	{
-		printf("Error\nFailed to create window\n");
 		return (0);
 	}
 	return (1);
@@ -67,24 +56,6 @@ static int	ft_load_all_textures(t_config *config)
 	if (!ft_load_single_texture(config, config->textures.east,
 			&config->tex_east))
 		return (0);
-	return (1);
-}
-
-static int	ft_create_image_buffer(t_config *config)
-{
-	config->img.img = mlx_new_image(config->mlx, WIDTH, HEIGHT);
-	if (!config->img.img)
-	{
-		printf("Error\nFailed to create image buffer\n");
-		return (0);
-	}
-	config->img.addr = mlx_get_data_addr(config->img.img, &config->img.bpp,
-			&config->img.line_len, &config->img.endian);
-	if (!config->img.addr)
-	{
-		printf("Error\nFailed to get image data\n");
-		return (0);
-	}
 	return (1);
 }
 

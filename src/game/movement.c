@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:09:41 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/16 19:00:21 by wbaali           ###   ########.fr       */
+/*   Updated: 2026/01/18 20:45:08 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,46 +65,6 @@ static void	apply_movement(t_config *config, double dx, double dy)
 	{
 		config->player.y = new_y;
 	}
-}
-
-void	move_forward(t_config *config)
-{
-	double	dx;
-	double	dy;
-
-	dx = cos(config->player.angle) * MOVE_SPEED;
-	dy = sin(config->player.angle) * MOVE_SPEED;
-	apply_movement(config, dx, dy);
-}
-
-void	move_backward(t_config *config)
-{
-	double	dx;
-	double	dy;
-
-	dx = -cos(config->player.angle) * MOVE_SPEED;
-	dy = -sin(config->player.angle) * MOVE_SPEED;
-	apply_movement(config, dx, dy);
-}
-
-void	move_left(t_config *config)
-{
-	double	dx;
-	double	dy;
-
-	dx = -sin(config->player.angle) * MOVE_SPEED;
-	dy = cos(config->player.angle) * MOVE_SPEED;
-	apply_movement(config, dx, dy);
-}
-
-void	move_right(t_config *config)
-{
-	double	dx;
-	double	dy;
-
-	dx = sin(config->player.angle) * MOVE_SPEED;
-	dy = -cos(config->player.angle) * MOVE_SPEED;
-	apply_movement(config, dx, dy);
 }
 
 void	rotate_left(t_config *config)

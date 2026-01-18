@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:23:33 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/16 16:51:51 by wbaali           ###   ########.fr       */
+/*   Updated: 2026/01/18 20:54:32 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,20 @@ int				parse_map(char **lines, t_config *config);
 int				init_mlx(t_config *config);
 void			init_player_angle(t_config *config);
 void			init_keys(t_config *config);
+int				ft_create_window(t_config *config);
+int				ft_create_image_buffer(t_config *config);
 
 /* Raycasting */
 void			cast_ray(t_config *config, int x, t_ray *ray);
+void			init_ray(t_ray *ray, t_config *config, int x);
+void			set_step(t_ray *ray, t_config *config);
+void			perform_dda(t_ray *ray, t_config *config);
 
 /* Rendu */
 int				render_frame(t_config *config);
+void			put_pixel(t_img *img, int x, int y, int color);
+int				get_texture_color(t_texture *tex, int x, int y);
+void			draw_ceiling_floor(t_config *config);
 
 /* Mouvement */
 void			move_forward(t_config *config);
