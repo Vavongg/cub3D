@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:07 by ainthana          #+#    #+#             */
-/*   Updated: 2025/12/10 15:19:29 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/16 19:10:38 by wbaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 static void	init_config(t_config *cfg)
 {
+	cfg->mlx = NULL;
+	cfg->win = NULL;
+	cfg->img.img = NULL;
 	cfg->textures.north = NULL;
 	cfg->textures.south = NULL;
 	cfg->textures.west = NULL;
 	cfg->textures.east = NULL;
+	cfg->tex_north.img = NULL;
+	cfg->tex_south.img = NULL;
+	cfg->tex_west.img = NULL;
+	cfg->tex_east.img = NULL;
 	cfg->floor.r = -1;
 	cfg->floor.g = -1;
 	cfg->floor.b = -1;
@@ -30,6 +37,30 @@ static void	init_config(t_config *cfg)
 	cfg->player.x = -1;
 	cfg->player.y = -1;
 	cfg->player.dir = 0;
+	cfg->player.angle = 0;
+	init_keys(cfg);
+}
+
+void	init_keys(t_config *config)
+{
+	config->keys.w = 0;
+	config->keys.s = 0;
+	config->keys.a = 0;
+	config->keys.d = 0;
+	config->keys.left = 0;
+	config->keys.right = 0;
+}
+
+void	init_player_angle(t_config *config)
+{
+	if (config->player.dir == 'N')
+		config->player.angle = 3 * M_PI / 2;
+	else if (config->player.dir == 'S')
+		config->player.angle = M_PI / 2;
+	else if (config->player.dir == 'E')
+		config->player.angle = 0;
+	else if (config->player.dir == 'W')
+		config->player.angle = M_PI;
 }
 
 void	free_config(t_config *cfg)
@@ -69,6 +100,14 @@ int	main(int argc, char **argv)
 	tab = read_cub_file(argv[1]);
 	parse_cub(tab, &config);
 	free_split(tab);
-	free_config(&config);
+	if (!init_mlx(&config))
+	{
+		free_config(&config);
+		exit(1);
+	}
+	init_player_angle(&config);
+	setup_hooks(&config);
+	render_frame(&config);
+	mlx_loop(config.mlx);
 	return (0);
 }
