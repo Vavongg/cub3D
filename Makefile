@@ -41,8 +41,11 @@ SRC_UTILS   = $(SRC_DIR)/utils/atoi.c \
 
 
 SRC_GAME    = $(SRC_DIR)/game/init_mlx.c \
+			  $(SRC_DIR)/game/init2_mlx.c \
               $(SRC_DIR)/game/raycasting.c \
+			  $(SRC_DIR)/game/raycasting2.c \
               $(SRC_DIR)/game/render.c \
+			  $(SRC_DIR)/game/render2.c \
               $(SRC_DIR)/game/movement.c \
 			  $(SRC_DIR)/game/movement2.c \
               $(SRC_DIR)/game/hooks.c

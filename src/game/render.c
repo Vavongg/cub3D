@@ -6,11 +6,18 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:07:48 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/18 20:50:57 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/19 12:58:58 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+typedef struct s_wall_params
+{
+	int					line_height;
+	int					draw_start;
+	int					draw_end;
+}						t_wall_params;
 
 static int	calculate_texture_x(t_ray *ray)
 {

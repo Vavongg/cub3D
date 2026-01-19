@@ -1,10 +1,10 @@
 F 40,40,40
 C 135,206,235
 
-NO textures/bombardiro1.xpm
-SO textures/paper.xpm
-WE textures/shit.xpm
-EA textures/exit_open.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
+EA textures/east.xpm
 
 111111111111111111111111
 100000000000000000000001

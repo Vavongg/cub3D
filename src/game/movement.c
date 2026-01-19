@@ -6,13 +6,13 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:09:41 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/18 20:45:08 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:00:51 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	is_wall(t_config *config, double x, double y)
+int	is_wall(t_config *config, double x, double y)
 {
 	int	map_x;
 	int	map_y;
@@ -27,7 +27,7 @@ static int	is_wall(t_config *config, double x, double y)
 	return (0);
 }
 
-static int	can_move(t_config *config, double new_x, double new_y)
+int	can_move(t_config *config, double new_x, double new_y)
 {
 	double	margin;
 
@@ -43,28 +43,6 @@ static int	can_move(t_config *config, double new_x, double new_y)
 	if (is_wall(config, new_x, new_y - margin))
 		return (0);
 	return (1);
-}
-
-static void	apply_movement(t_config *config, double dx, double dy)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = config->player.x + dx;
-	new_y = config->player.y + dy;
-	if (can_move(config, new_x, new_y))
-	{
-		config->player.x = new_x;
-		config->player.y = new_y;
-	}
-	else if (can_move(config, new_x, config->player.y))
-	{
-		config->player.x = new_x;
-	}
-	else if (can_move(config, config->player.x, new_y))
-	{
-		config->player.y = new_y;
-	}
 }
 
 void	rotate_left(t_config *config)

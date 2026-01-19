@@ -6,7 +6,7 @@
 /*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:23:33 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/18 20:54:32 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:00:48 by ainthana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,9 @@ void			move_left(t_config *config);
 void			move_right(t_config *config);
 void			rotate_left(t_config *config);
 void			rotate_right(t_config *config);
+void			apply_movement(t_config *config, double dx, double dy);
+int				can_move(t_config *config, double new_x, double new_y);
+int				is_wall(t_config *config, double x, double y);
 
 /* Hooks */
 int				close_game(t_config *config);
