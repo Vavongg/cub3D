@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:06:53 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/18 20:48:20 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:58:30 by wbaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static t_texture	*get_texture(t_ray *ray, t_config *config)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			return (&config->tex_west);
-		else
 			return (&config->tex_east);
+		else
+			return (&config->tex_west);
 	}
 	else
 	{

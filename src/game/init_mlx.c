@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:03:01 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/18 20:53:48 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:16:43 by wbaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,25 @@ static int	ft_load_all_textures(t_config *config)
 		return (0);
 	if (!ft_load_single_texture(config, config->textures.south,
 			&config->tex_south))
+	{
+		mlx_destroy_image(config->mlx, config->tex_north.img);
 		return (0);
+	}
 	if (!ft_load_single_texture(config, config->textures.west,
 			&config->tex_west))
+	{
+		mlx_destroy_image(config->mlx, config->tex_north.img);
+		mlx_destroy_image(config->mlx, config->tex_south.img);
 		return (0);
+	}
 	if (!ft_load_single_texture(config, config->textures.east,
 			&config->tex_east))
+	{
+		mlx_destroy_image(config->mlx, config->tex_north.img);
+		mlx_destroy_image(config->mlx, config->tex_south.img);
+		mlx_destroy_image(config->mlx, config->tex_west.img);
 		return (0);
+	}
 	return (1);
 }
 

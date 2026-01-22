@@ -54,3 +54,15 @@ void	draw_ceiling_floor(t_config *config)
 		y++;
 	}
 }
+
+void	free_config_two(t_config *cfg)
+{
+	if (cfg->textures.north)
+		free(cfg->textures.north);
+	if (cfg->textures.south)
+		free(cfg->textures.south);
+	if (cfg->textures.west)
+		free(cfg->textures.west);
+	if (cfg->textures.east)
+		free(cfg->textures.east);
+}

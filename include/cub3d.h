@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ainthana <ainthana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbaali <wbaali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 19:23:33 by wassim            #+#    #+#             */
-/*   Updated: 2026/01/19 13:00:48 by ainthana         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:07:46 by wbaali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void			cast_ray(t_config *config, int x, t_ray *ray);
 void			init_ray(t_ray *ray, t_config *config, int x);
 void			set_step(t_ray *ray, t_config *config);
 void			perform_dda(t_ray *ray, t_config *config);
+void			free_config_two(t_config *cfg);
 
 /* Rendu */
 int				render_frame(t_config *config);
