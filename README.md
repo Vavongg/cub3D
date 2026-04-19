@@ -299,6 +299,6 @@ cub3D/
 <div align="center">
 
 Built with 🎮 (and a lot of trigonometry) at **42 School**
-by [Vavongg](https://github.com/Vavongg) & [wbaali](https://github.com/wbaali)
+by [Vavongg](https://github.com/Vavongg) & [wbaali](https://github.com/wassim971)
 
 </div>
